@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact form</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="nav">
+      <ul>
+        <li><a href="main.html">General Info</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="degrees.html">School degrees</a></li>
+        <li>
+          <a href="https://github.com/sebahags" target="_blank">My GitHub</a>
+        </li>
+        <li><a href="contact.html">Contact me</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <h1 id="page-title">Get In Touch</h1>
+      <form class="contact_form" onsubmit="sendEmail(); reset(); return false">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Email id" required />
+        <input type="text" id="phone" placeholder="Phone number" required />
+        <textarea id="message" rows="4" placeholder="Whats Up?"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+      <!--have to set up api for email provider before publish-->
+      function sendEmail() {
+        Email.send({
+          Host: "smtp.elasticemail.com",
+          Username: "username",
+          Password: "password",
+          To: "my email",
+          From: document.getElementById("email").value,
+          Subject: "New contact from homepage",
+          Body:
+            "Name: " +
+            document.getElementById("name").value +
+            "<br> Email: " +
+            document.getElementById("email").value +
+            "<br> Phone: " +
+            document.getElementById("phone").value +
+            "<br> Message: " +
+            document.getElementById("message").value,
+        }).then((message) => alert("Message Sent"));
+      }
+    </script>
+  </body>
+</html>
